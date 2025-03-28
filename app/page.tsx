@@ -1,6 +1,5 @@
 // app/page.tsx
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import HeroIllustration from "@/components/home/hero-illustration";
 import FeatureCard from "@/components/home/feature-card";
@@ -80,7 +79,7 @@ export default function HomePage() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Key Features</h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl">
-                Our platform provides everything you need to succeed in today's digital landscape.
+                Our platform provides everything you need to succeed in today&apos;s digital landscape.
               </p>
             </div>
           </div>

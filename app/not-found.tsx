@@ -71,7 +71,7 @@ export default function NotFound() {
           </h1>
           
           <p className="text-lg text-muted-foreground mb-8 max-w-lg mx-auto">
-            The page you're looking for seems to have wandered off. Perhaps it's
+            The page you&apos;re looking for seems to have wandered off. Perhaps it&apos;s
             exploring the digital wilderness or taking a well-deserved break.
           </p>
 
@@ -97,9 +97,3 @@ export default function NotFound() {
     </div>
   );
 }
-
-// Add this to your global CSS file if not already present
-// @keyframes fadeIn {
-//   from { opacity: 0; transform: translateY(-10px); }
-//   to { opacity: 1; transform: translateY(0); }
-// }

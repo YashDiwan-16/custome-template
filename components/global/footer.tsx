@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { Instagram, Twitter, Github, Linkedin } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 export function Footer() {
   return (
