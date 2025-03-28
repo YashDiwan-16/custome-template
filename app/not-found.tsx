@@ -18,7 +18,7 @@ export default function NotFound() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background text-foreground p-4">
-      <div className="container max-w-3xl mx-auto text-center">
+      <div className=" max-w-3xl mx-auto text-center">
         <div className="opacity-0 animate-[fadeIn_0.5s_ease_forwards]">
           <div className="relative w-full h-48 sm:h-64 md:h-80 mb-8">
             <div className="absolute inset-0 flex items-center justify-center">
