@@ -4,8 +4,8 @@ import type { TeamMember } from "@/types/teams"
 
 export default function TeamSection() {
   return (
-    <section id="team" className="w-full py-12 md:py-24 lg:py-32 bg-muted">
-      <div className=" px-4 md:px-6">
+    <section id="team" className="w-full py-12 md:py-24 lg:py-32">
+      <div className=" mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <Badge variant="outline" className="inline-flex items-center border-primary/20 bg-primary/10 text-primary">
@@ -21,9 +21,11 @@ export default function TeamSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 mt-16 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-16">
           {teamMembers.map((member, index) => (
-            <TeamMemberCard key={member.name} member={member} index={index} />
+            <div key={member.name} className="flex h-full">
+              <TeamMemberCard member={member} index={index} />
+            </div>
           ))}
         </div>
       </div>
@@ -58,39 +60,6 @@ const teamMembers: TeamMember[] = [
     name: "Michael Chen",
     role: "Chief Technology Officer",
     bio: "Michael drives our technological innovation, keeping us at the cutting edge of our industry.",
-    image: "/placeholder.svg?height=300&width=300",
-    socialLinks: {
-      linkedin: "#",
-      twitter: "#",
-      github: "#",
-    },
-  },
-  {
-    name: "David Rodriguez",
-    role: "Lead Software Engineer",
-    bio: "David architects our software solutions with a focus on scalability and performance.",
-    image: "/placeholder.svg?height=300&width=300",
-    socialLinks: {
-      linkedin: "#",
-      twitter: "#",
-      github: "#",
-    },
-  },
-  {
-    name: "Priya Patel",
-    role: "Frontend Developer",
-    bio: "Priya creates intuitive and responsive user interfaces that delight our customers.",
-    image: "/placeholder.svg?height=300&width=300",
-    socialLinks: {
-      linkedin: "#",
-      twitter: "#",
-      github: "#",
-    },
-  },
-  {
-    name: "Emma Thompson",
-    role: "Creative Director",
-    bio: "Emma leads our design vision, ensuring a cohesive and engaging brand experience.",
     image: "/placeholder.svg?height=300&width=300",
     socialLinks: {
       linkedin: "#",

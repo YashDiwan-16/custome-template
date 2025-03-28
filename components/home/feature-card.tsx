@@ -17,7 +17,7 @@ export default function FeatureCard({ title, description, icon }: FeatureCardPro
   const IconComponent = getIconComponent(icon);
   
   return (
-    <Card className="h-full transition-all hover:shadow-md cursor-pointer">
+    <Card className="h-full transition-all hover:shadow-emerald-100 cursor-pointer">
       <CardHeader>
         <div className="flex items-center gap-2">
           <div className="bg-primary/10 p-2 rounded-full">

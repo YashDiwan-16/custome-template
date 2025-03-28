@@ -37,16 +37,20 @@ interface ValueCardProps {
 
 function ValueCard({ icon, title, description }: ValueCardProps) {
   return (
-    <Card className="relative overflow-hidden border-none bg-gradient-to-b from-background to-muted shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group">
-      <div className="absolute top-0 left-0 w-full h-1 bg-primary/50" />
-      <div className="absolute -right-16 -top-16 w-32 h-32 bg-primary/5 rounded-full group-hover:bg-primary/10 transition-colors duration-500" />
-      <CardContent className="p-6 pt-8">
-        <div className="relative inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+    <Card className="relative overflow-hidden bg-gradient-to-b from-background to-muted shadow-md transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group">
+      {/* Animated decorative elements */}
+      <div className="absolute -right-16 -top-16 w-32 h-32 bg-primary/5 rounded-full group-hover:bg-primary/10 transition-all duration-700 group-hover:scale-150 group-hover:rotate-45" />
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-transparent group-hover:bg-primary/20 transition-all duration-500 scale-x-0 group-hover:scale-x-100 origin-left" />
+      <CardContent className="p-6 pt-8 z-10 relative">
+        <div className="relative inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4 transition-all duration-500 group-hover:bg-primary/20 group-hover:scale-110 group-hover:rotate-3">
           {icon}
         </div>
-        <h3 className="text-2xl font-bold">{title}</h3>
-        <p className="mt-2 text-muted-foreground">{description}</p>
+        <h3 className="text-2xl font-bold transition-transform duration-300 group-hover:translate-x-1">{title}</h3>
+        <p className="mt-2 text-muted-foreground transition-opacity duration-500 opacity-90 group-hover:opacity-100">{description}</p>
       </CardContent>
+      
+      {/* Additional subtle animated accent */}
+      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-700 pointer-events-none" />
     </Card>
   )
 }
