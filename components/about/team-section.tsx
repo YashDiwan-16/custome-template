@@ -5,7 +5,7 @@ import type { TeamMember } from "@/types/teams"
 export default function TeamSection() {
   return (
     <section id="team" className="w-full py-12 md:py-24 lg:py-32">
-      <div className=" mx-auto px-4 md:px-6">
+      <div className="mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <Badge variant="outline" className="inline-flex items-center border-primary/20 bg-primary/10 text-primary">
@@ -23,7 +23,7 @@ export default function TeamSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-16">
           {teamMembers.map((member, index) => (
-            <div key={member.name} className="flex h-full">
+            <div key={member.name} className="flex h-full bg-background/50 backdrop-blur-sm rounded-lg border border-muted/30 shadow-sm hover:shadow-md transition-all">
               <TeamMemberCard member={member} index={index} />
             </div>
           ))}

@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -36,6 +36,11 @@ export default function ContactForm() {
   const [activeField, setActiveField] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
+  const [blobPositions, setBlobPositions] = useState([
+    { x: 20, y: 20, size: 150 },
+    { x: 70, y: 60, size: 200 },
+    { x: 40, y: 80, size: 180 },
+  ])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,6 +51,20 @@ export default function ContactForm() {
       message: "",
     },
   })
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBlobPositions(prev => 
+        prev.map(blob => ({
+          x: blob.x + (Math.random() * 2 - 1),
+          y: blob.y + (Math.random() * 2 - 1),
+          size: Math.max(100, Math.min(250, blob.size + (Math.random() * 10 - 5)))
+        }))
+      );
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return
@@ -74,10 +93,10 @@ export default function ContactForm() {
   }
 
   const formFields = [
-    { name: "name", label: "Name", icon: User, color: "from-violet-500 to-fuchsia-500" },
-    { name: "email", label: "Email", icon: Mail, color: "from-blue-500 to-cyan-500" },
-    { name: "subject", label: "Subject", icon: FileText, color: "from-emerald-500 to-green-500" },
-    { name: "message", label: "Message", icon: MessageSquare, color: "from-amber-500 to-yellow-500" },
+    { name: "name", label: "Name", icon: User, color: "bg-white/40" },
+    { name: "email", label: "Email", icon: Mail, color: "bg-white/40" },
+    { name: "subject", label: "Subject", icon: FileText, color: "bg-white/40" },
+    { name: "message", label: "Message", icon: MessageSquare, color: "bg-white/40" },
   ]
 
   if (isSubmitted) {
@@ -85,22 +104,41 @@ export default function ContactForm() {
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
-        className="relative h-full rounded-2xl overflow-hidden shadow-xl"
+        className="relative h-full rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-black/40 to-black/20 backdrop-blur-lg border border-white/20"
         style={{
-          backgroundImage: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.1) 0%, transparent 50%)`,
+          boxShadow: "0 10px 30px -5px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.2)",
         }}
       >
+        {/* Background blobs */}
+        <div className="absolute inset-0 overflow-hidden">
+          {blobPositions.map((blob, i) => (
+            <div 
+              key={i}
+              className="absolute rounded-full bg-white/5 blur-3xl transition-all duration-5000 ease-in-out"
+              style={{
+                left: `${blob.x}%`,
+                top: `${blob.y}%`,
+                width: `${blob.size}px`,
+                height: `${blob.size}px`,
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Light reflection on top */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+        
         <div className="relative z-10 h-full flex flex-col items-center justify-center p-10 text-center">
-          <div className="w-24 h-24 rounded-full flex items-center justify-center bg-gradient-to-r from-green-400 to-emerald-500 mb-6 text-white shadow-lg shadow-emerald-500/20">
-            <CheckCircle2 className="h-12 w-12" />
+          <div className="w-24 h-24 rounded-full flex items-center justify-center bg-black/40 backdrop-blur-lg border border-white/20 shadow-inner shadow-white/5">
+            <CheckCircle2 className="h-12 w-12 text-white" />
           </div>
-          <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Message Sent!</h2>
-          <p className="text-slate-600 dark:text-slate-300 mb-8 max-w-md">
+          <h2 className="text-2xl font-bold mt-6 mb-4 text-white">Message Sent!</h2>
+          <p className="text-gray-300 mb-8 max-w-md">
             Thank you for reaching out. Our team will review your message and get back to you as soon as possible.
           </p>
           <Button
             onClick={() => setIsSubmitted(false)}
-            className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white border-none shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300"
+            className="bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-lg transition-all duration-300 shadow-lg hover:shadow-white/5"
           >
             Send another message
           </Button>
@@ -113,16 +151,36 @@ export default function ContactForm() {
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative rounded-2xl overflow-hidden shadow-xl"
+      className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-black/40 to-black/20 backdrop-blur-lg border border-white/20"
       style={{
-        backgroundImage: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.1) 0%, transparent 50%)`,
+        boxShadow: "0 10px 30px -5px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.2)",
       }}
     >
+      {/* Background blobs */}
+      <div className="absolute inset-0 overflow-hidden">
+        {blobPositions.map((blob, i) => (
+          <div 
+            key={i}
+            className="absolute rounded-full bg-white/5 blur-3xl transition-all duration-5000 ease-in-out"
+            style={{
+              left: `${blob.x}%`,
+              top: `${blob.y}%`,
+              width: `${blob.size}px`,
+              height: `${blob.size}px`,
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Light reflection on top */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+      {/* Light reflection on side */}
+      <div className="absolute top-0 bottom-0 left-0 w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+
       <div className="relative z-10 p-8">
-        <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400">
-            Send us a message
-          </span>
+        <h2 className="text-2xl font-bold mb-6 text-white flex items-center">
+          <span className="mr-2">Send us a message</span>
+          <div className="h-px flex-grow bg-gradient-to-r from-white/50 to-transparent ml-4"></div>
         </h2>
 
         <Form {...form}>
@@ -135,9 +193,12 @@ export default function ContactForm() {
                   name={field.name as "name" | "email"}
                   render={({ field: formField }) => (
                     <FormItem
-                      className={cn("transition-all duration-300", activeField === field.name ? "scale-105" : "")}
+                      className={cn(
+                        "transition-all duration-300", 
+                        activeField === field.name ? "scale-105" : ""
+                      )}
                     >
-                      <FormLabel className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
+                      <FormLabel className="flex items-center gap-2 text-gray-200 font-medium">
                         <field.icon className="h-4 w-4" />
                         {field.label}
                       </FormLabel>
@@ -147,22 +208,23 @@ export default function ContactForm() {
                             placeholder={`Your ${field.label.toLowerCase()}`}
                             {...formField}
                             className={cn(
-                              "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 transition-all duration-300",
-                              activeField === field.name ? "shadow-[0_0_15px_rgba(168,85,247,0.15)]" : "",
+                              "bg-black/30 border-white/10 text-white placeholder:text-gray-500 transition-all duration-300 backdrop-blur-sm",
+                              activeField === field.name ? "ring-1 ring-white/30" : "",
+                              "hover:border-white/30 focus:bg-black/40"
                             )}
                             onFocus={() => setActiveField(field.name)}
                             onBlur={() => setActiveField(null)}
                           />
                           <div
                             className={cn(
-                              "absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r transition-all duration-500",
+                              "absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-500",
                               field.color,
-                              activeField === field.name ? "w-full" : "",
+                              activeField === field.name ? "w-full" : ""
                             )}
                           ></div>
                         </div>
                       </FormControl>
-                      <FormMessage className="text-pink-600 dark:text-pink-400" />
+                      <FormMessage className="text-red-300" />
                     </FormItem>
                   )}
                 />
@@ -176,9 +238,12 @@ export default function ContactForm() {
                 name={field.name as "subject" | "message"}
                 render={({ field: formField }) => (
                   <FormItem
-                    className={cn("transition-all duration-300", activeField === field.name ? "scale-[1.02]" : "")}
+                    className={cn(
+                      "transition-all duration-300", 
+                      activeField === field.name ? "scale-[1.02]" : ""
+                    )}
                   >
-                    <FormLabel className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
+                    <FormLabel className="flex items-center gap-2 text-gray-200 font-medium">
                       <field.icon className="h-4 w-4" />
                       {field.label}
                     </FormLabel>
@@ -188,8 +253,9 @@ export default function ContactForm() {
                           <Textarea
                             placeholder={`Your ${field.label.toLowerCase()}`}
                             className={cn(
-                              "min-h-32 resize-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 transition-all duration-300",
-                              activeField === field.name ? "shadow-[0_0_15px_rgba(168,85,247,0.15)]" : "",
+                              "min-h-32 resize-none bg-black/30 border-white/10 text-white placeholder:text-gray-500 transition-all duration-300 backdrop-blur-sm",
+                              activeField === field.name ? "ring-1 ring-white/30" : "",
+                              "hover:border-white/30 focus:bg-black/40"
                             )}
                             {...formField}
                             onFocus={() => setActiveField(field.name)}
@@ -200,8 +266,9 @@ export default function ContactForm() {
                             placeholder={`Your ${field.label.toLowerCase()}`}
                             {...formField}
                             className={cn(
-                              "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 transition-all duration-300",
-                              activeField === field.name ? "shadow-[0_0_15px_rgba(168,85,247,0.15)]" : "",
+                              "bg-black/30 border-white/10 text-white placeholder:text-gray-500 transition-all duration-300 backdrop-blur-sm",
+                              activeField === field.name ? "ring-1 ring-white/30" : "",
+                              "hover:border-white/30 focus:bg-black/40"
                             )}
                             onFocus={() => setActiveField(field.name)}
                             onBlur={() => setActiveField(null)}
@@ -209,14 +276,14 @@ export default function ContactForm() {
                         )}
                         <div
                           className={cn(
-                            "absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r transition-all duration-500",
+                            "absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-500",
                             field.color,
-                            activeField === field.name ? "w-full" : "",
+                            activeField === field.name ? "w-full" : ""
                           )}
                         ></div>
                       </div>
                     </FormControl>
-                    <FormMessage className="text-pink-600 dark:text-pink-400" />
+                    <FormMessage className="text-red-300" />
                   </FormItem>
                 )}
               />
@@ -224,7 +291,7 @@ export default function ContactForm() {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white border-none shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300"
+              className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-lg transition-all duration-300 shadow-lg hover:shadow-white/5"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -244,9 +311,9 @@ export default function ContactForm() {
 
         {/* Status indicator */}
         <div className="mt-6 text-center">
-          <div className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <span className="block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            Secure Form - Your data is protected
+          <div className="inline-flex items-center gap-2 text-sm text-gray-400">
+            <span className="block w-2 h-2 rounded-full bg-white animate-pulse"></span>
+            <span className="text-white/70">Secure Form - Your data is protected</span>
           </div>
         </div>
       </div>
