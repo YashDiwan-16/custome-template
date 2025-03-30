@@ -1,9 +1,7 @@
 // components/hero-illustration.tsx
 import { SVGProps } from "react";
 
-interface HeroIllustrationProps extends SVGProps<SVGSVGElement> {}
-
-export default function HeroIllustration({ className, ...props }: HeroIllustrationProps) {
+export default function HeroIllustration({ className, ...props }: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

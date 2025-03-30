@@ -24,7 +24,7 @@ export default function ContactPage() {
               Get in touch
             </h1>
             <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
-              We'd love to hear from you. Reach out and let's start a conversation.
+              We&apos;d love to hear from you. Reach out and let&apos;s start a conversation.
             </p>
           </div>
 

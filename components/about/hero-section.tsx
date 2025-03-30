@@ -21,7 +21,7 @@ export default function HeroSection() {
                 Meet the Team Behind Our Vision
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                We're a passionate group of innovators, creators, and problem-solvers dedicated to making a difference.
+                We&apos;re a passionate group of innovators, creators, and problem-solvers dedicated to making a difference.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -151,27 +151,27 @@ function ImageGrid() {
   )
 }
 
-// Add these style definitions to your global CSS or add them inline with a style tag
-const svgAnimationStyles = `
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
+// // Add these style definitions to your global CSS or add them inline with a style tag
+// const svgAnimationStyles = `
+// @keyframes float {
+//   0% { transform: translateY(0px); }
+//   50% { transform: translateY(-10px); }
+//   100% { transform: translateY(0px); }
+// }
 
-@keyframes draw {
-  0% { stroke-dashoffset: 1000; }
-  100% { stroke-dashoffset: 0; }
-}
+// @keyframes draw {
+//   0% { stroke-dashoffset: 1000; }
+//   100% { stroke-dashoffset: 0; }
+// }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
+// .animate-float {
+//   animation: float 6s ease-in-out infinite;
+// }
 
-.animate-draw {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: draw 5s linear forwards;
-}
-`;
+// .animate-draw {
+//   stroke-dasharray: 1000;
+//   stroke-dashoffset: 1000;
+//   animation: draw 5s linear forwards;
+// }
+// `;
 

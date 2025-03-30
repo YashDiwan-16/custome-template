@@ -326,7 +326,7 @@ export default function ContactInfo() {
   }
 
   // Generate vCard data in the correct format
-  const generateVCardData = (option: any) => {
+  const generateVCardData = (option: ContactOption) => {
     let vcard = "BEGIN:VCARD\nVERSION:3.0\n"
     vcard += "FN:Example Company\n"
     vcard += "ORG:Example Company\n"
@@ -344,7 +344,7 @@ export default function ContactInfo() {
   }
 
   // Download vCard file
-  const downloadVCard = (e: React.MouseEvent, option: any) => {
+  const downloadVCard = (e: React.MouseEvent, option: ContactOption) => {
     e.preventDefault()
     e.stopPropagation()
     

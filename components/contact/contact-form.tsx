@@ -120,8 +120,8 @@ export default function ContactForm() {
               className="absolute rounded-full blur-3xl transition-all duration-5000 ease-in-out
                 dark:bg-white/5 bg-gray-500/5"
               style={{
-                left: `${blob.x}%`,
-                top: `${blob.y}%`,
+                left: i === 0 ? `calc(${blob.x}% + ${mousePosition.x * 0.01}px)` : `${blob.x}%`,
+                top: i === 0 ? `calc(${blob.y}% + ${mousePosition.y * 0.01}px)` : `${blob.y}%`,
                 width: `${blob.size}px`,
                 height: `${blob.size}px`,
               }}

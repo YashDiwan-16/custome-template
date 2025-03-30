@@ -17,7 +17,7 @@ interface PricingCardProps {
 }
 
 export function PricingCard({
-  id,
+  
   name,
   icon: Icon,
   description,
