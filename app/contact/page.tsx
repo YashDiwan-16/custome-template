@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import ContactForm from "@/components/contact/contact-form"
 import ContactInfo from "@/components/contact/contact-info"
-import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -10,7 +9,6 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
       <div className="min-h-screen w-full ">
         {/* Background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -36,7 +34,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-    </ThemeProvider>
   )
 }
 

@@ -85,7 +85,7 @@ export default function ContactForm() {
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
-        className="relative h-full rounded-2xl overflow-hidden bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-xl"
+        className="relative h-full rounded-2xl overflow-hidden shadow-xl"
         style={{
           backgroundImage: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.1) 0%, transparent 50%)`,
         }}
@@ -113,7 +113,7 @@ export default function ContactForm() {
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative rounded-2xl overflow-hidden bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-xl"
+      className="relative rounded-2xl overflow-hidden shadow-xl"
       style={{
         backgroundImage: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.1) 0%, transparent 50%)`,
       }}
